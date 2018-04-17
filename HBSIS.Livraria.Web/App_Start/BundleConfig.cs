@@ -16,12 +16,9 @@ namespace HBSIS.Livraria.Web
                        "~/Content/js/vendor/bootstrap.3.3.7.min.js",
                         "~/Content/js/vendor/vue.min.js"));
 
-            //bundles.Add(new ScriptBundle("~/admin/event/index").Include(
-            //            "~/Content/js/vendor/moment.min.js",
-            //            "~/Content/js/view/admin/event/event.index.js",
-            //            "~/Content/js/view/admin/event/event.unity-list.js",
-            //            "~/Content/js/view/admin/event/event.unity-import.js"));
-
+            bundles.Add(new ScriptBundle("~/admin/book/index").Include(
+                        "~/Content/js/view/admin/book/book.index.js"));
+            
             #endregion
 
             BundleTable.EnableOptimizations = false;

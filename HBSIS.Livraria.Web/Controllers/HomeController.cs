@@ -13,5 +13,10 @@ namespace HBSIS.Livraria.Web.Controllers
         {
             return View();
         }
+
+        public JsonResult List()
+        {
+            return Json(Repository.Livro.List(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -1,15 +1,32 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <title>HBSIS Livraria</title>
-        <link rel="shortcut icon" href="#">
+<head>
+    <title>HBSIS Livraria</title>
+    <link rel="shortcut icon" href="#">
+    @Scripts.Render("~/admin/scripts")
+    @Styles.Render("~/admin/styles")
 
-        @using System.Web.Optimization
-        @Scripts.Render("~/admin/scripts")
-        @Styles.Render("~/admin/styles")
-
-    </head>       
-    <body>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">HBSIS</div>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/Home/Index">Início</a></li>                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
         @RenderBody()
-    </body>
+    </div>
+</body>
 </html>

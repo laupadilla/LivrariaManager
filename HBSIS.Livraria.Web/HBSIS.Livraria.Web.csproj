@@ -110,6 +110,7 @@
     <Content Include="Content\js\vendor\bootstrap.3.3.7.min.js" />
     <Content Include="Content\js\vendor\jquery-3.2.1.min.js" />
     <Content Include="Content\js\vendor\vue.min.js" />
+    <Content Include="Content\js\view\admin\book\book.index.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
