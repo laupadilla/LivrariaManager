@@ -3,14 +3,40 @@
         el: '#divBookList',
         data: {
             errors: [],
-            books: []
+            modalErrors: [],
+            livros: [],
+            livro: {}
         },
         methods: {
-            load: function (cb) {
+            load: function () {
                 var self = this;
 
-                //console.log(self);
                 loadBooks(self);
+            },
+            newBook: function () {
+                clearFields(this);
+                showModal('#divBookForm');
+            },
+            add: function () {
+                var self = this;
+
+                saveBook(self);
+            },
+            edit: function (index) {
+                var self = this;
+
+                editBook(self, index);
+            },
+            remove: function (index) {
+                var self = this;
+
+                deleteBook(self, index);
+            },
+            cancel: function () {
+                var self = this;
+
+                clearFields(self);
+                closeModal('#divBookForm');
             }
         },
         mounted: function () {
@@ -23,8 +49,7 @@
         $.get({
             url: '/Home/List'
         }).done(function (response) {
-            console.log(response);
-            self.books = response;
+            self.livros = response;
         }).fail(function (xhr) {
             if (console)
                 console.log(xhr);
@@ -33,4 +58,60 @@
         });
     }
 
+    function saveBook(self) {
+        $.post({
+            url: '/Home/Save',
+            data: self.livro
+        }).done(function (result) {
+
+            if (result.data.Id !== 0) {
+                self.load();
+                clearFields(self);
+                closeModal('#divBookForm');
+            }
+            else if (result.errors.length > 0) {
+                self.modalErrors = result.errors;
+            }
+
+        }).fail(function (xhr) {
+            if (console)
+                console.log(xhr);
+
+            self.modalErrors = ['Não foi possível realizar esta ação, tente novamente!'];
+        });
+    }
+
+    function editBook(self, index) {
+        self.livro = JSON.parse(JSON.stringify(self.livros[index]));
+        self.livro.DataPublicacao = moment(self.livro.DataPublicacao).format('YYYY-MM-DD');
+        showModal('#divBookForm');
+    }
+
+    function deleteBook(self, index) {
+        var livro = self.livros[index];
+
+        $.post({
+            url: '/Home/Delete',
+            data: { id: livro.Id }
+        }).done(function () {
+            self.livros.splice(index, 1);
+        }).fail(function (xhr) {
+            if (console)
+                console.log(xhr);
+
+            self.modalErrors = ['Não foi possível realizar esta ação, tente novamente!'];
+        });
+    }
+
+    function clearFields(self) {
+        self.livro = {};
+    }
+
+    function showModal(selector) {
+        $(selector).modal('show');
+    }
+
+    function closeModal(selector) {
+        $(selector).modal('hide');
+    }    
 })();

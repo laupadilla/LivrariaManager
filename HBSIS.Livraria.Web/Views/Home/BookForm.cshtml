@@ -1,0 +1,60 @@
+﻿<div class="modal fade" id="divBookForm" data-backdrop="static" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title">Cadastro Livro</h3>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="name">Título</label>
+                                    <input type="text" v-model="livro.Titulo" class="form-control" maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label for="name">Data Publicação</label>
+                                    <input type="date" v-model="livro.DataPublicacao" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="name">Editora</label>
+                                    <input type="text" v-model="livro.Editora" class="form-control" maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="name">Autor</label>
+                                    <input type="text" v-model="livro.Autor" class="form-control" maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="modalErrors.length > 0">
+                            <ul>
+                                <li v-for="e in modalErrors" v-text="e"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button v-on:click="cancel" type="button" class="btn btn-secondary">Cancelar</button>
+                    <button v-on:click="add" type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

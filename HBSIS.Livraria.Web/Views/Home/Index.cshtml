@@ -5,10 +5,8 @@
 
 <div id="divBookList" v-cloak>
 
-
     <div class="btn-group" role="group" style="margin: 20px 0;">
-        @*<button v-on:click="newEvent" type="button" class="btn btn-primary">Novo Evento</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ExportExcel", "/Event/")'">Exportar</button>*@
+        <button v-on:click="newBook" type="button" class="btn btn-primary">Novo</button>
     </div>
 
     <div v-if="errors.length > 0">
@@ -17,34 +15,43 @@
         </ul>
     </div>
 
-    <label v-if="books.length <= 0">Não há livros cadastrados</label>
+    <label v-if="livros.length <= 0">Não há livros cadastrados</label>
 
     <div class="table-responsive">
-        <table class="table" v-if="books.length > 0">
+        <table class="table" v-if="livros.length > 0">
             <thead>
                 <tr>
                     <th scope="col">Título</th>
-                    <th scope="col">Valor</th>
                     <th scope="col">Data de Publicação</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Editora</th>
                     <th scope="col">Criado em</th>
-                    <th scope="col">Atualizado em</th>                    
+                    <th scope="col">Atualizado em</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(b, bx) in books">
-                    <td>{{ b.Titulo }}</td>
-                    <td>{{ b.Valor }}</td>
-                    <td>{{ b.DataPublicacaoFormatado }}</td>
-                    <td>{{ b.AutorId }}</td>
-                    <td>{{ b.EditoraId }}</td>
-                    <td>{{ b.CriacaoFormatado }}</td>
-                    <td>{{ b.AtualizacaoFormatado }}</td>
+                <tr v-for="(l, lx) in livros">
+                    <td>{{ l.Titulo }}</td>
+                    <td>{{ l.DataPublicacaoFormatado }}</td>
+                    <td>{{ l.Autor }}</td>
+                    <td>{{ l.Editora }}</td>
+                    <td>{{ l.CriacaoFormatado }}</td>
+                    <td>{{ l.AtualizacaoFormatado }}</td>
+                    <td>
+                        <button v-on:click="edit(lx)" type="button" class="btn btn-secondary">Editar</button>
+                    </td>
+                    <td>
+                        <button v-on:click="remove(lx)" type="button" class="btn btn-secondary">Excluir</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <!-- book form modal -->
+    @Html.Partial("BookForm")
 </div>
 
 
